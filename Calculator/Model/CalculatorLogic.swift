@@ -17,37 +17,44 @@ struct CalculatorLogic {
         self.number = number
     }
     
-    func calculate(symbol: String) -> Double? {
+    mutating func calculate(symbol: String) -> Double? {
         
-//        guard let number = number else {
-//            fatalError("Label 沒有值")
-//        }
-
         if let n = number {
-            if symbol == "AC" {
+            switch symbol {
+            case "AC":
                 return 0
-            } else if symbol == "+/-" {
+            case "+/-":
                 return n * -1
-            } else if symbol == "%" {
+            case "%":
                 return n / 100
+            case "=":
+                return performTwoNumCalculation(n2: n)
+            default:
+                intermediateCalculation = (n1: n, calcMethod: symbol)
             }
         }
         
-        
-        
         return nil
+    }
+    
+    private func performTwoNumCalculation(n2: Double) -> Double? {
         
-//        switch symbol {
-//        case "AC":
-//            number = 0
-//        case "+/-":
-//            number *= -1
-//        case "%":
-//            number = number / 100
-//
-//        default:
-//            break
-//        }
-//        return number
+        if let n1 = intermediateCalculation?.n1, let operation = intermediateCalculation?.calcMethod {
+            
+            switch operation {
+            case "+":
+                return n1 + n2
+            case "-":
+                return n1 - n2
+            case "×":
+                return n1 * n2
+            case "÷":
+                return n1 / n2
+            default:
+                fatalError("operation 錯誤")
+            }
+            
+        }
+        return nil
     }
 }

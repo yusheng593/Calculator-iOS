@@ -34,14 +34,14 @@ class ViewController: UIViewController {
         
         if let currentTitle = sender.currentTitle {
             
-            guard let result = calculatorLogic.calculate(symbol: currentTitle) else {
-                fatalError("計算後返回了 nil")
+            if let result = calculatorLogic.calculate(symbol: currentTitle) {
+                displayValue = result
             }
-            displayValue = result
+            
         }
         
     }
-
+    
     
     @IBAction func numButtonPressed(_ sender: UIButton) {
         
@@ -70,8 +70,8 @@ class ViewController: UIViewController {
         }
         
         
-    
+        
     }
-
+    
 }
 
