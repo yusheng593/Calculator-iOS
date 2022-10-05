@@ -11,6 +11,7 @@ import Foundation
 struct CalculatorLogic {
     
     private var number: Double?
+    private var intermediateCalculation:(n1: Double,calcMethod: String)?
     
     mutating func setNumber(_ number: Double) {
         self.number = number
