@@ -24,13 +24,16 @@ class ViewController: UIViewController {
             displayLabel.text = String(newValue)
         }
     }
+    private var calculatorLogic = CalculatorLogic()
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         
         isFinishedTypingNumber = true
         
+        calculatorLogic.setNumber(displayValue)
+        
         if let currentTitle = sender.currentTitle {
-            let calculatorLogic = CalculatorLogic(number: displayValue)
+            
             guard let result = calculatorLogic.calculate(symbol: currentTitle) else {
                 fatalError("計算後返回了 nil")
             }
